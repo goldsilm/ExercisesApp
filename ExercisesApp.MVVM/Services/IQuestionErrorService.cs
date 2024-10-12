@@ -8,9 +8,10 @@ namespace ExercisesApp.MVVM.Services
 { 
     public interface IQuestionErrorService
     {
-        Task Record(QuestionType type,int questionId);
-        Task Remove(QuestionType type, int questionId);
-        Task RemoveCount(QuestionType type, int questionId);
+        Task Record(IQuestion question);
+        Task Remove(IQuestion question);
+        Task RemoveCount(IQuestion question);
         Task RemoveAll();
+        Task<IList<QuestionError>> SelectAll();
     }
 }

@@ -11,6 +11,9 @@ namespace ExercisesApp.MVVM.Services
         Task Create(string BankName, string Author);
         Task Delete(QuesitonBank quesitonBank);
         Task DeleteById(int BankId);
+        Task<IList<QuesitonBank>> SelectRecycleBin();
+        Task DeleteRecycleBin();
+        Task Recover(QuesitonBank quesitonBank);
         Task<IList<QuesitonBank>> SelectByName(string Name);
         Task<IList<QuesitonBank>> SelectAll();
         Task UpDate(QuesitonBank quesitonBank);

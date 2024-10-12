@@ -36,8 +36,25 @@ namespace ExercisesApp.MVVM.Services
             return await _db.Table<T>().Where(q=>q.Question.Contains(Question)).ToListAsync();
         }
 
+        public async Task<IList<T>> SelectAll()
+        {
+            return await _db.Table<T>().ToListAsync();
+        }
+
         public async Task Update(T Question)
         {
+            await _db.UpdateAsync(Question);
+        }
+
+        public async Task Star(T Question)
+        {
+            Question.IsStar = true;
+            await _db.UpdateAsync(Question);
+        }
+
+        public async Task UnStar(T Question)
+        {
+            Question.IsStar = false;
             await _db.UpdateAsync(Question);
         }
 

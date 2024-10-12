@@ -13,5 +13,8 @@ namespace ExercisesApp.MVVM.Services
         Task DeleteById(int Id);
         Task<T> SelectById(int Id);
         Task<IList<T>> SelectByQuestion(string t);
+        Task<IList<T>> SelectAll();
+        Task Star(T Question);
+        Task UnStar(T Question);
     }
 }

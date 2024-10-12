@@ -28,8 +28,6 @@ namespace ExercisesApp.MVVM.Services
             db.CreateTable<FillBlankQuestion>();
             db.CreateTable<ShortAnswerQuestion>();
             db.CreateTable<CaseAnalysisQuestion>();
-            db.CreateTable<QuesitonBank>();
-            db.CreateTable<QuestionStar>();
             db.CreateTable<QuestionError>();
             db.Close();
         }

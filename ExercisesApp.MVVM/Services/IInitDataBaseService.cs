@@ -9,6 +9,5 @@ namespace ExercisesApp.MVVM.Services
     {
         void InitQuestionBank();
         void InitQuestions(string bankName);
-
     }
 }

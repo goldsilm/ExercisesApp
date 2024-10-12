@@ -22,5 +22,6 @@ namespace ExercisesApp.MVVM.Models
         public int CaseAnalysisQuestionCount { get; set; }
         public int QuestionStarCount {  get; set; }
         public int QuestionErrorCount { get; set; }
+        public bool IsDeleted {  get; set; }
     }
 }

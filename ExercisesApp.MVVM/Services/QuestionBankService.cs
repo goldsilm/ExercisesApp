@@ -37,34 +37,44 @@ namespace ExercisesApp.MVVM.Services
 
         public async Task Delete(QuesitonBank quesitonBank)
         {
-           if(File.Exists(quesitonBank.BankFileName))
-            {
-                File.Delete(quesitonBank.BankFileName);
-            }
-           await _db.DeleteAsync(quesitonBank);
+           quesitonBank.IsDeleted = true;
+           await _db.UpdateAsync(quesitonBank);
         }
 
         public async Task DeleteById(int BankId)
         {
-            var bank=await _db.Table<QuesitonBank>().Where(b => b.Id == BankId).FirstOrDefaultAsync();
-            if(bank != null)
+            var bank=await _db.Table<QuesitonBank>().Where(b=>b.Id==BankId).FirstOrDefaultAsync();
+            if(bank!=null)
             {
-                if (File.Exists(bank.BankFileName))
-                {
-                    File.Delete(bank.BankFileName);
-                }
+                bank.IsDeleted = true;
+                await _db.UpdateAsync(bank);
             }
-            await _db.DeleteAsync<QuesitonBank>(BankId);
+        }
+
+        public async Task<IList<QuesitonBank>> SelectRecycleBin()
+        {
+            return await _db.Table<QuesitonBank>().Where(b => b.IsDeleted).ToListAsync();
+        }
+
+        public async Task DeleteRecycleBin()
+        {
+            await _db.Table<QuesitonBank>().Where(b => b.IsDeleted).DeleteAsync();
+        }
+
+        public async Task Recover(QuesitonBank quesitonBank)
+        {
+            quesitonBank.IsDeleted=false;
+            await _db.UpdateAsync(quesitonBank);
         }
 
         public async Task<IList<QuesitonBank>> SelectAll()
         {
-            return await _db.Table<QuesitonBank>().ToListAsync();
+            return await _db.Table<QuesitonBank>().Where(b=>!b.IsDeleted).ToListAsync();
         }
 
         public async Task<IList<QuesitonBank>> SelectByName(string Name)
         {
-            return await _db.Table<QuesitonBank>().Where(b=>b.Name.Contains(Name)).ToListAsync();
+            return await _db.Table<QuesitonBank>().Where(b=>b.Name.Contains(Name)&&!b.IsDeleted).ToListAsync();
         }
 
         public async Task UpDate(QuesitonBank quesitonBank)
