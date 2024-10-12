@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExerciseAppMVVM.Models.Questions
+namespace ExercisesApp.MVVM.Models
 {
     public interface IQuestion
     { 
